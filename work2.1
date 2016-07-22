@@ -5,7 +5,7 @@ void main(){
 	int *arr2,j=1;
 	int size = sizeof(arr)/sizeof(int);
 
-	for (i=0;i<=10;i++)
+	for (i=0;i<=size-1;i++)
 	{
 		printf("%d, ",arr[i]);
 
@@ -21,18 +21,21 @@ void main(){
     {
     	if (arr[j]!=arr[j+1])
     	{
-    		arr2[j]=arr[i];
+    		arr2[i]=arr[j];
     		i++;
-    		j++;
+
     	}
 
     }
 
     for (j=0;j<=10;j++)
     	{
-    		printf("%d, ",arr2[i]);
+    		printf("%d, ",arr2[j]);
 
     	}
+
+
+    
 
 	free(arr2);
 }
