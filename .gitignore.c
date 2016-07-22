@@ -13,23 +13,26 @@ void main(){
 
 	arr2 = (int*) malloc(sizeof(arr)*sizeof(int));
 
-    for (j=0;j>i-1;j++)
+	if(arr2){
+		printf("\nSUCESS\n");
+		}
+
+    for (j=0,i=0;j<10;j++)
     {
-    	if (arr[i]!=arr[i+1])
+    	if (arr[j]!=arr[j+1])
     	{
     		arr2[j]=arr[i];
     		i++;
     		j++;
     	}
-    	else
-    		i++;
+
     }
 
-	for (i=0;i<=10;i++)
-		{
-			printf("%d, ",arr2[i]);
+    for (j=0;j<=10;j++)
+    	{
+    		printf("%d, ",arr2[i]);
 
-		}
+    	}
 
 	free(arr2);
 }
