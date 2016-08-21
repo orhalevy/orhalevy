@@ -15,6 +15,7 @@ void Ex3();
 /* Declarations of other functions */
 
 int * powerArray(int sz);  //for first question
+int ** productMatrix( int ** mat1, int **mat2, int rows_mat1, int columns_mat2);
 
 
 /* ------------------------------- */
@@ -35,15 +36,18 @@ int main() {
 		switch (select) {
 		case 1: Ex1(); break;
 		case 2: Ex2(); break;
-		case 3: Ex3(); break;
+	//	case 3: Ex3(); break;
 				}
 		} while (all_Ex_in_loop && select);
 	return 0;
 }
 /* Function definitions */
 
+//----------------------------------------
+
+
 //Exercise 1
-void main(){
+void Ex1(){
 	int * arr,j;
 	int n;
 
@@ -99,17 +103,129 @@ int * powerArray(int sz){
 	return arr;
 }
 
-/*
-//Exercise 2
-void Ex2()
-{
-	int n; //The lenght of the series
-	printf("Please insert the lenght of the binary series: ");
-	scanf("%d", &n);
+//----------------------------------------
 
-	printf("\n\nthe sequence starts on the %dst place\n\n", binarysequence(n));
+//Exercise 2
+
+void Ex2(){
+int **mat1, **mat2; //mat1, mat2
+int rows_mat1,columns_mat1,rows_mat2,columns_mat2; //rows & columns mat1+2
+int *pointer; //The pointer to the Multiplied matix
+int i,j;
+
+printf("\nEnter the Order of the First matrix...\n");
+scanf("%d %d",&rows_mat1,&columns_mat1);
+printf("\nEnter the Order of the Second matrix...\n");
+scanf("%d %d",&rows_mat2,&columns_mat2);
+
+if(columns_mat1!=rows_mat2){ // A necessary condition that matrix could multiply each other
+    printf("Invalid Order of matrix"); // number of columns mat1 not even the number of rows mat2
+    exit(EXIT_SUCCESS);
 }
 
+mat1= (int**) malloc(rows_mat1*sizeof(int*)); //malloc first mat- rows
+
+for(i=0;i<columns_mat1;i++) //malloc first mat- columns
+    mat1[i]=(int*)malloc(columns_mat1*sizeof(int));
+
+//Input Matrix1
+    for(i=0;i<rows_mat1;i++) //scan from user the integers of mat 1
+        for(j=0;j<columns_mat1;j++)
+            scanf("%d",&mat1[i][j]);
+
+    /*
+     ADDITIONAL
+        //Printing Input Matrix 1
+
+        printf("\n Entered Matrix 1: \n");
+        for(i=0;i<rows_mat1;i++){
+            for(j=0;j<columns_mat1;j++)
+                printf("%d ",mat1[i][j]);
+            printf("\n");
+        }
+     */
+
+mat2= (int**) malloc(rows_mat2*sizeof(int*)); //malloc second mat - rows
+
+for(i=0;i<columns_mat2;i++) //malloc second mat - columns
+    mat2[i]=(int*)malloc(columns_mat2*sizeof(int));
+
+//Input Matrix2
+    for(i=0;i<rows_mat2;i++) //scan from user the integers of mat 2
+        for(j=0;j<columns_mat2;j++)
+            scanf("%d",&mat2[i][j]);
+
+/*
+ ADDITIONAL
+    //Printing Input Matrix 2
+
+       printf("\n Entered Matrix 2: \n");
+for(i=0;i<rows_mat2;i++){
+    for(j=0;j<columns_mat2;j++)
+        printf("%d ",mat2[i][j]);
+    printf("\n");
+}
+*/
+
+
+
+    pointer = ** productMatrix( mat1, mat2, rows_mat1, columns_mat2);
+
+    printf("address new array is: %p", &pointer);
+}
+
+
+
+
+int ** productMatrix( int ** mat1, int **mat2, int rows_mat1, int columns_mat2){
+
+    int **multiplied_mat;
+    int i,j,k; //columns & rows new array and index k
+
+multiplied_mat=(int**)calloc(rows_mat1,sizeof(int*));
+
+for(i=0;i<columns_mat2;i++)
+    multiplied_mat[i]=(int*)calloc(columns_mat2,sizeof(int));
+
+
+//Multiplication
+
+    for(i=0;i<rows_mat1;i++){
+        for(j=0;j<columns_mat2;j++){
+                multiplied_mat[i][j]=0;
+                for(k=0 ; k < columns_mat2 ; k++ ) // here!
+                    multiplied_mat[i][j]+= mat1[i][k]*mat2[k][j];
+
+        }
+        printf("\n");
+    }
+
+
+    /*
+     ADDITIONAL
+        //Printing third mat
+         *
+   printf("\nThe Multiplication of two matrix is\n");
+   for(i=0;i<rows_mat1;i++){
+       printf("\n");
+       for(j=0;j<columns_mat2;j++)
+            printf("%d\t",multiplied_mat[i][j]);
+   }
+    printf("\n");
+    }
+    */
+
+
+
+
+
+return multiplied_mat; //return address new array
+}
+
+
+//----------------------------------------
+
+/*
 
 //Exercise 3
 void Ex3()
@@ -117,82 +233,27 @@ void Ex3()
 	int n;
 	printf("\nEnter the number of rows you wish to see in pascal triangle ");
 	scanf("%d", &n);
-
 	pascaltriangle(n);
-
-
 }
 void pascaltriangle(int n)
 {
 	int rows = n, line;
 	int index, basis, space, tab;
 	printf("\n\n");
-
 	tab = rows;
 	for (index = 0; index <= rows; index++)
 	{
 		basis = 1; //base is 1
-
 		for (space = tab; space >= 0; space--) //the space will return tab to get the troangle better
 			printf(" ");
-
 		tab--; //every row get the tab -1 (smaller)
-
 		for (line = 0; line <= index; line++)
 		{
 			printf("%d ", basis);
 			basis = (basis*(index - line) / (line + 1));
 		}
-
 		printf("\n"); //new line to the triangle
 	}
-}
-
-//Exercise 4
-void Ex4()
-{
-	int lim;
-	printf("the number to check ");
-	scanf("%d", &lim);
-
-	ambnumbers(lim);
-}
-
-void ambnumbers(int n)
-{
-	int i;
-	int optionalnum;
-
-	for (i = 1; i <= n; i++) //check the numbers until "i"
-	{
-		optionalnum = divids(i);
-
-		if (optionalnum > i)
-		{
-			if (divids(optionalnum) == i)
-				printf("Found %d and %d \n", i, optionalnum);
-		}
-	}
-}
-
-int divids(int checknum)
-{
-	int k;
-	int sum = 1; //if check 1=>  num 1
-
-	if (checknum == 1)
-		return 1;
-
-	for (k = 2; k*k < checknum; k++) //start on 2
-	{
-		if (checknum % k == 0)
-			sum += k + (checknum / k);
-	}
-
-	if (k*k == checknum)
-		sum += k;
-
-	return sum;
 }
 */
 
