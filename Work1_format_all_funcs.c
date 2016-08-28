@@ -10,7 +10,7 @@
 
 void Ex1();
 void Ex2();
-void Ex3();
+//void Ex3();
 
 /* Declarations of other functions */
 
@@ -113,13 +113,21 @@ int rows_mat1,columns_mat1,rows_mat2,columns_mat2; //rows & columns mat1+2
 int *pointer; //The pointer to the Multiplied matix
 int i,j;
 
-printf("\nEnter the Order of the First matrix...\n");
-scanf("%d %d",&rows_mat1,&columns_mat1);
-printf("\nEnter the Order of the Second matrix...\n");
-scanf("%d %d",&rows_mat2,&columns_mat2);
+printf("\nEnter the rows of the First matrix...\n");
+scanf("%d",&rows_mat1);
+
+printf("\nEnter the columns of the First matrix...\n");
+scanf("%d" ,&columns_mat1);
+
+
+printf("\nEnter the rows of the Second matrix...\n");
+scanf("%d",&rows_mat2);
+printf("\nEnter the columns of the Second matrix...\n");
+scanf("%d",&columns_mat2);
+
 
 if(columns_mat1!=rows_mat2){ // A necessary condition that matrix could multiply each other
-    printf("Invalid Order of matrix"); // number of columns mat1 not even the number of rows mat2
+    printf("Invalid Order of matrix (can't multiply those martices"); // number of columns mat1 not even the number of rows mat2
     exit(EXIT_SUCCESS);
 }
 
@@ -129,14 +137,21 @@ for(i=0;i<columns_mat1;i++) //malloc first mat- columns
     mat1[i]=(int*)malloc(columns_mat1*sizeof(int));
 
 //Input Matrix1
+
+	printf("\nNow we will input first matrix:");
+
     for(i=0;i<rows_mat1;i++) //scan from user the integers of mat 1
+	{
         for(j=0;j<columns_mat1;j++)
-            scanf("%d",&mat1[i][j]);
-
+		{
+		printf("\nfill in the [%d],[%d] =>\n",j, i);
+	
+        scanf("%d",&mat1[i][j]);
+		}
+	}
     /*
-     ADDITIONAL
+	ADDITIONAL
         //Printing Input Matrix 1
-
         printf("\n Entered Matrix 1: \n");
         for(i=0;i<rows_mat1;i++){
             for(j=0;j<columns_mat1;j++)
@@ -151,14 +166,21 @@ for(i=0;i<columns_mat2;i++) //malloc second mat - columns
     mat2[i]=(int*)malloc(columns_mat2*sizeof(int));
 
 //Input Matrix2
+
+	printf("\nNow we will input second matrix:");
+
     for(i=0;i<rows_mat2;i++) //scan from user the integers of mat 2
+	{
         for(j=0;j<columns_mat2;j++)
+		{
+			printf("\nfill in the [%d],[%d] =>\n",j, i);
             scanf("%d",&mat2[i][j]);
+		}
+	}
 
 /*
  ADDITIONAL
     //Printing Input Matrix 2
-
        printf("\n Entered Matrix 2: \n");
 for(i=0;i<rows_mat2;i++){
     for(j=0;j<columns_mat2;j++)
@@ -169,15 +191,15 @@ for(i=0;i<rows_mat2;i++){
 
 
 
-    pointer = ** productMatrix( mat1, mat2, rows_mat1, columns_mat2);
+    pointer = *productMatrix( mat1, mat2, rows_mat1, columns_mat2);
 
-    printf("address new array is: %p", &pointer);
+    printf("address new array is: %p and point to %d \n\n\n)", &pointer, *pointer);
 }
 
 
 
 
-int ** productMatrix( int ** mat1, int **mat2, int rows_mat1, int columns_mat2){
+int **productMatrix( int ** mat1, int **mat2, int rows_mat1, int columns_mat2){
 
     int **multiplied_mat;
     int i,j,k; //columns & rows new array and index k
@@ -208,7 +230,7 @@ for(i=0;i<columns_mat2;i++)
    printf("\nThe Multiplication of two matrix is\n");
    for(i=0;i<rows_mat1;i++){
        printf("\n");
-       for(j=0;j<columns_mat2;j++)
+       for(j=0;j<columns_mat2;j++){
             printf("%d\t",multiplied_mat[i][j]);
    }
     printf("\n");
@@ -226,7 +248,6 @@ return multiplied_mat; //return address new array
 //----------------------------------------
 
 /*
-
 //Exercise 3
 void Ex3()
 {
@@ -256,4 +277,3 @@ void pascaltriangle(int n)
 	}
 }
 */
-
