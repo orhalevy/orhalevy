@@ -113,16 +113,16 @@ int rows_mat1,columns_mat1,rows_mat2,columns_mat2; //rows & columns mat1+2
 int *pointer; //The pointer to the Multiplied matix
 int i,j;
 
-printf("\nEnter the rows of the First matrix...\n");
+printf("\nEnter the rows of the First matrix  =>       ");
 scanf("%d",&rows_mat1);
 
-printf("\nEnter the columns of the First matrix...\n");
+printf("\nEnter the columns of the First matrix  =>       ");
 scanf("%d" ,&columns_mat1);
 
 
-printf("\nEnter the rows of the Second matrix...\n");
+printf("\nEnter the rows of the Second matrix  =>       ");
 scanf("%d",&rows_mat2);
-printf("\nEnter the columns of the Second matrix...\n");
+printf("\nEnter the columns of the Second matrix  =>       ");
 scanf("%d",&columns_mat2);
 
 
@@ -138,13 +138,13 @@ for(i=0;i<columns_mat1;i++) //malloc first mat- columns
 
 //Input Matrix1
 
-	printf("\nNow we will input first matrix:");
+	printf("\nNow we will input first matrix: \n");
 
     for(i=0;i<rows_mat1;i++) //scan from user the integers of mat 1
 	{
         for(j=0;j<columns_mat1;j++)
 		{
-		printf("\nfill in the [%d],[%d] =>\n",j, i);
+		printf("\nfill in the [%d],[%d] =>       ",j+1, i+1);
 	
         scanf("%d",&mat1[i][j]);
 		}
@@ -167,13 +167,13 @@ for(i=0;i<columns_mat2;i++) //malloc second mat - columns
 
 //Input Matrix2
 
-	printf("\nNow we will input second matrix:");
+	printf("\nNow we will input second matrix: \n");
 
     for(i=0;i<rows_mat2;i++) //scan from user the integers of mat 2
 	{
         for(j=0;j<columns_mat2;j++)
 		{
-			printf("\nfill in the [%d],[%d] =>\n",j, i);
+			printf("\nfill in the [%d],[%d] =>       ",j+1, i+1);
             scanf("%d",&mat2[i][j]);
 		}
 	}
