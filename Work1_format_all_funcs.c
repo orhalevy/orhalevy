@@ -5,17 +5,19 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
+#include "list.h"
 
 /* Function declarations */
 
 void Ex1();
 void Ex2();
-//void Ex3();
+void Ex3();
 
 /* Declarations of other functions */
 
 int * powerArray(int sz);  //for first question
-int ** productMatrix( int ** mat1, int **mat2, int rows_mat1, int columns_mat2);
+int ** productMatrix( int ** mat1, int **mat2, int rows_mat1, int columns_mat2); //for the second question
+int ArrayOf( int **a, int n, item **ansArray ,int m, list **ansList); //for the third question
 
 
 /* ------------------------------- */
@@ -30,13 +32,13 @@ int main() {
 		printf("EXIT-->0\n");
 		do {
 			select = 0;
-			printf("please select 0-4 : ");
+			printf("please select 0-3 : ");
 			scanf("%d", &select);
-		} while ((select<0) || (select>4));
+		} while ((select<0) || (select>3));
 		switch (select) {
 		case 1: Ex1(); break;
 		case 2: Ex2(); break;
-	//	case 3: Ex3(); break;
+		case 3: Ex3(); break;
 				}
 		} while (all_Ex_in_loop && select);
 	return 0;
@@ -237,43 +239,92 @@ for(i=0;i<columns_mat2;i++)
     }
     */
 
-
-
-
-
 return multiplied_mat; //return address new array
 }
 
 
 //----------------------------------------
 
-/*
+
 //Exercise 3
 void Ex3()
 {
-	int n;
-	printf("\nEnter the number of rows you wish to see in pascal triangle ");
-	scanf("%d", &n);
-	pascaltriangle(n);
-}
-void pascaltriangle(int n)
-{
-	int rows = n, line;
-	int index, basis, space, tab;
-	printf("\n\n");
-	tab = rows;
-	for (index = 0; index <= rows; index++)
+int **a; //mat to fill and check , a=mat
+int n, m; //rows & columns:  rows_mat=m, columns_mat=n
+int i,j; //index for the mat
+int answer; //the answer of the  problem
+
+printf("\nEnter the rows of the matrix  =>       ");
+scanf("%d",&n);
+
+printf("\nEnter the columns of the matrix  =>       ");
+scanf("%d" ,&m);
+
+a=(int **)malloc(n*sizeof(int)); //malloc the mat
+
+for (i=0;i<m;i++)
+	a[i]=(int*)malloc(m*sizeof(int));
+
+// input mat
+
+printf("\nNow we will input matrix: \n");
+
+    for(i=0;i<n;i++) //scan from user the integers of mat 1
 	{
-		basis = 1; //base is 1
-		for (space = tab; space >= 0; space--) //the space will return tab to get the troangle better
-			printf(" ");
-		tab--; //every row get the tab -1 (smaller)
-		for (line = 0; line <= index; line++)
+        for(j=0;j<m;j++)
 		{
-			printf("%d ", basis);
-			basis = (basis*(index - line) / (line + 1));
+		printf("\nfill in the [%d],[%d] =>       ",j, i);
+	
+        scanf("%d",&a[i][j]);
 		}
-		printf("\n"); //new line to the triangle
 	}
+    /*
+	ADDITIONAL
+        //Printing Input Matrix
+        printf("\n Entered Matrix: \n");
+        for(i=0;i<rows_mat;i++){
+            for(j=0;j<columns_mat;j++)
+                printf("%d ",mat1[i][j]);
+            printf("\n");
+        }
+     */
+
+	answer= ArrayOf( int **a, int n, item **ansArray ,int m, list **ansList);
+	//a=mat
+	//n=rows
+	//m=columns
+
+	printf("%d",answer);
+
 }
-*/
+
+
+int ArrayOf( int **a, int n, item **ansArray ,int m, list **ansList)
+{
+
+	int i,j; //index of mat to check equals
+
+	
+
+for(i=0;i<n;i++) // now we will check if i+j= int the user put
+	{
+        for(j=0;j<m;j++)
+		{
+		printf("\n did [%d]+[%d]= %d?\n",j, i, a[i][j]);
+	
+		if (i+j==a[i][j])
+
+        printf("yes!\nCreate triple struct");
+
+
+		else 
+			printf("no!\n");
+		}
+	}
+
+
+
+
+
+
+}
