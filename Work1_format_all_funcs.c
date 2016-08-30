@@ -124,6 +124,7 @@ scanf("%d" ,&columns_mat1);
 
 printf("\nEnter the rows of the Second matrix  =>       ");
 scanf("%d",&rows_mat2);
+
 printf("\nEnter the columns of the Second matrix  =>       ");
 scanf("%d",&columns_mat2);
 
@@ -253,6 +254,8 @@ int **a; //mat to fill and check , a=mat
 int n, m; //rows & columns:  rows_mat=m, columns_mat=n
 int i,j; //index for the mat
 int answer; //the answer of the  problem
+int **ansArray; //the requested arrat
+int **ansList; //the requested list
 
 printf("\nEnter the rows of the matrix  =>       ");
 scanf("%d",&n);
@@ -289,7 +292,7 @@ printf("\nNow we will input matrix: \n");
         }
      */
 
-	answer= ArrayOf( int **a, int n, item **ansArray ,int m, list **ansList);
+	answer= ArrayOf( **a,  n, **ansArray , m, **ansList);
 	//a=mat
 	//n=rows
 	//m=columns
@@ -301,10 +304,11 @@ printf("\nNow we will input matrix: \n");
 
 int ArrayOf( int **a, int n, item **ansArray ,int m, list **ansList)
 {
-
+	int *arr; // the array created 1D 
+	int k=0; //index of inseted integers to array
 	int i,j; //index of mat to check equals
 
-	
+	arr=(int *)malloc(n*m*sizeof(int)); //malloc 1D array per the size of the mat
 
 for(i=0;i<n;i++) // now we will check if i+j= int the user put
 	{
@@ -312,19 +316,22 @@ for(i=0;i<n;i++) // now we will check if i+j= int the user put
 		{
 		printf("\n did [%d]+[%d]= %d?\n",j, i, a[i][j]);
 	
-		if (i+j==a[i][j])
+		if (i+j==a[i][j]){
 
         printf("yes!\nCreate triple struct");
 
-
+		
+		arr[i] = a[i][j]; // insert to the X place in the array
+		k++; //index +1
+		}
 		else 
-			printf("no!\n");
+			printf("no!\n"); // go to the next int
 		}
 	}
 
 
+(int *) realloc((int *)arr[0], k); //realloc and delete the garbage rest of the array
 
-
-
+return k; //return the numbers of times that the  i+j=integer inserted (size of the 1D array)
 
 }
