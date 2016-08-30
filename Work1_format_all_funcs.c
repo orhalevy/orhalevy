@@ -304,11 +304,15 @@ printf("\nNow we will input matrix: \n");
 
 int ArrayOf( int **a, int n, item **ansArray ,int m, list **ansList)
 {
+
 	int *arr; // the array created 1D 
 	int k=0; //index of inseted integers to array
 	int i,j; //index of mat to check equals
+	int *pointer;
 
 	arr=(int *)malloc(n*m*sizeof(int)); //malloc 1D array per the size of the mat
+
+	pointer =(int *)createNode(0);
 
 for(i=0;i<n;i++) // now we will check if i+j= int the user put
 	{
@@ -323,6 +327,7 @@ for(i=0;i<n;i++) // now we will check if i+j= int the user put
 		
 		arr[i] = a[i][j]; // insert to the X place in the array
 		k++; //index +1
+
 		}
 		else 
 			printf("no!\n"); // go to the next int
